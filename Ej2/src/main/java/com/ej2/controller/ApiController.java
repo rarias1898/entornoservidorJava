@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,7 +33,7 @@ public class ApiController {
 	}
 	
 	@GetMapping("cliente/{username}")
-	public Cliente getClient(@RequestParam String username) {
+	public Cliente getClient(@PathVariable String username) {
 		
 		for (Cliente cliente : clientes) {
 			if(cliente.getUsername().equalsIgnoreCase(username)) {
