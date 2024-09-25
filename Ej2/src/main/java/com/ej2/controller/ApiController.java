@@ -27,12 +27,19 @@ public class ApiController {
 	}
 	
 	@GetMapping("/cliente")
-	public List<Cliente> obtenerClientes() {
+	public List<Cliente> getClients() {
 		return clientes;
 	}
 	
-	@GetMapping("cliente/{id}")
-	public List<Cliente> obtenerCliente(@RequestParam int id) {
-		return clientes;
+	@GetMapping("cliente/{username}")
+	public Cliente getClient(@RequestParam String username) {
+		
+		for (Cliente cliente : clientes) {
+			if(cliente.getUsername().equalsIgnoreCase(username)) {
+				return cliente;
+			}
+		}
+		
+		return null;
 	}
 }
