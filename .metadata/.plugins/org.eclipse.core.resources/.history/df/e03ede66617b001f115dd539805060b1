@@ -1,0 +1,22 @@
+package com.ej1.controller;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class PalindromoController {
+
+	@GetMapping("/validar-palabra/{palindromo}")
+	public String validarPalindromo(@PathVariable String palindromo) {
+		
+		palindromo.substring(0, palindromo.length() -1);
+		
+		for(int i = 0; i <= palindromo.length() / 2; i++) {
+			for(int j = palindromo.length() - 1; j >= 0; j--) {
+			}
+		}
+		
+		return "Hola";
+	}
+}
