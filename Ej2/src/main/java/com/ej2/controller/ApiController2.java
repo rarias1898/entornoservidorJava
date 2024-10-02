@@ -1,4 +1,4 @@
-/*package com.ej2.controller;
+package com.ej2.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,11 +11,12 @@ import org.springframework.web.bind.annotation.*;
 import com.ej2.models.Cliente;
 
 @RestController
-public class ApiController {
+@RequestMapping("/clientes")
+public class ApiController2 {
 
 	private List<Cliente> clientes = new ArrayList<>();
 	
-	public ApiController() {
+	public ApiController2() {
 		Cliente c1 = new Cliente(1, "angel", "aaridom", "pass1");
 		Cliente c2 = new Cliente(2, "pepe", "pepipo", "pass2");
 		Cliente c3 = new Cliente(3, "paco", "maracar", "pass3");
@@ -27,12 +28,12 @@ public class ApiController {
 		clientes.add(c4);
 	}
 	
-	@GetMapping("/cliente")
+	@GetMapping
 	public List<Cliente> getClients() {
 		return clientes;
 	}
 	
-	@GetMapping("cliente/{username}")
+	@GetMapping("/{username}")
 	public Cliente getClient(@PathVariable String username) {
 		
 		for (Cliente cliente : clientes) {
@@ -43,14 +44,14 @@ public class ApiController {
 		return null;
 	}
 
-	@PostMapping("/clientes")
+	@PostMapping
 	public Cliente addClient(@RequestBody Cliente newClient) {
 
 		clientes.add(newClient);
 		return newClient;
 	}
 
-	@PutMapping("/cliente/{id}")
+	@PutMapping("/{id}")
 	public Cliente updateClient(@PathVariable int id, @RequestBody Cliente updatedClient) {
 
 		for(Cliente cliente : clientes) {
@@ -65,7 +66,7 @@ public class ApiController {
 		return null;
 	}
 
-	@DeleteMapping("/cliente/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<String> deleteClient(@PathVariable int id) {
 
 		for (Cliente cliente : clientes) {
@@ -79,10 +80,10 @@ public class ApiController {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente no encontrado");
 	}
 
-	@PatchMapping("/cliente/{id}")
+	@PatchMapping("/{id}")
 	public Cliente updateSmallClient(@PathVariable int id, @RequestBody Cliente updateClient) {
 		// Aqui para el patch hay que ver en el updateClient cuales son los campos que no son null.
-		// Eso quiere decir cuales son los campos que vamos a i
+		// Eso quiere decir cuales son los campos que vamos a insertar.
 		for (Cliente cliente : clientes) {
 			if (cliente.getId() == id) {
 				cliente.setName(updateClient.getName());
@@ -94,4 +95,3 @@ public class ApiController {
 		return null;
 	}
 }
-*/
