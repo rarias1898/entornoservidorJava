@@ -86,7 +86,18 @@ public class ApiController2 {
 		// Eso quiere decir cuales son los campos que vamos a insertar.
 		for (Cliente cliente : clientes) {
 			if (cliente.getId() == id) {
-				cliente.setName(updateClient.getName());
+				
+				if(updateClient.getName() != null) {
+					cliente.setName(updateClient.getName());
+				}
+				
+				if(updateClient.getUsername() != null) {
+					cliente.setUsername(updateClient.getUsername());
+				}
+				
+				if(updateClient.getPassword() != null) {
+					cliente.setPassword(updateClient.getPassword());
+				}
 
 				return cliente;
 			}
