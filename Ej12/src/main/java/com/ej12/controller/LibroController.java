@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class LibroController {
@@ -122,5 +124,18 @@ public class LibroController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(generos);
+    }
+    
+    @GetMapping("/libros/autor/{numLibros}")
+    public Map<String, Integer> getAuthorMaxBooks(@PathVariable int numLibros) {
+    	Map<String, Integer> maxBooks = new HashMap<>();
+    	// Buscar la manera de saber cuantos libros escribe cada autor. (map ? Hashmap)
+    	
+    	for (Libros libro : libros) {
+    		maxBooks.put(libro.getAutor(), numLibros);
+    	}
+    	
+    	return maxBooks;
+    	
     }
 }
