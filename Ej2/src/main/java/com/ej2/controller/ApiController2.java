@@ -82,8 +82,6 @@ public class ApiController2 {
 
 	@PatchMapping("/{id}")
 	public Cliente updateSmallClient(@PathVariable int id, @RequestBody Cliente updateClient) {
-		// Aqui para el patch hay que ver en el updateClient cuales son los campos que no son null.
-		// Eso quiere decir cuales son los campos que vamos a insertar.
 		for (Cliente cliente : clientes) {
 			if (cliente.getId() == id) {
 				

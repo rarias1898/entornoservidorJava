@@ -34,7 +34,7 @@ public class LibroController {
     public ResponseEntity<List<Libros>> getLibros() {
 
         if (libros.isEmpty()) {
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.notFound().build();
         }
 
         return ResponseEntity.ok(libros);
@@ -48,7 +48,7 @@ public class LibroController {
                 return ResponseEntity.ok(libro);
             }
         }
-        return null;
+        return ResponseEntity.notFound().build();
     }
 
     @PostMapping("/libros/add")
@@ -61,7 +61,7 @@ public class LibroController {
             libros.add(newLibro);
             return ResponseEntity.ok("Libro creado");
         }
-        return null;
+        return ResponseEntity.notFound().build();
     }
 
     @PutMapping("/libros/{id}")
@@ -80,7 +80,37 @@ public class LibroController {
             }
             return ResponseEntity.badRequest().body("No se ha encontrado un libro con esa id");
         }
-        return null;
+        return ResponseEntity.notFound().build();
+    }
+    
+    @PatchMapping("libros/{id}")
+    public ResponseEntity<Void> editPLibro(@PathVariable int id, @RequestBody Libros editedLibro) {
+    	for (Libros libro : libros) {
+    		if (libro.getId() == id) {
+    			if (editedLibro.getTitulo() != null) {
+    				libro.setTitulo(editedLibro.getTitulo());
+    			}
+    			if (editedLibro.getAutor() != null) {
+    				libro.setAutor(editedLibro.getAutor());
+    			}
+    			if (editedLibro.getEditorial() != null) {
+    				libro.setEditorial(editedLibro.getEditorial());
+    			}
+    			if (editedLibro.getIsbn() != null) {
+    				libro.setIsbn(editedLibro.getIsbn());
+    			}
+    			if (editedLibro.getAnoPublicacion() != 0) {
+    				libro.setAnoPublicacion(editedLibro.getAnoPublicacion());
+    			}
+    			if (editedLibro.getGeneros() != null) {
+    				libro.setGeneros(editedLibro.getGeneros());
+    			}
+    			
+    			return ResponseEntity.noContent().build();
+    		}
+    	}
+    	
+    	return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/libros/{id}")
@@ -93,7 +123,7 @@ public class LibroController {
             libros.remove(libro);
             return ResponseEntity.ok("Libro borrado");
         }
-        return null;
+        return ResponseEntity.notFound().build();
     }
 
     @GetMapping("/libros/novelas")

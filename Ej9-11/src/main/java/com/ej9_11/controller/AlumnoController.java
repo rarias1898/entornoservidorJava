@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @RestController
@@ -70,9 +71,10 @@ public class AlumnoController {
                 alumno.setEmail(updatedAlumno.getEmail());
                 alumno.setEdad(updatedAlumno.getEdad());
                 alumno.setCurso(updatedAlumno.getCurso());
-
-                Direccion nuevaDireccion = updatedAlumno.getDireccion();
-                alumno.setDireccion(nuevaDireccion);
+                alumno.setDireccion(updatedAlumno.getDireccion());
+                
+                //Direccion nuevaDireccion = updatedAlumno.getDireccion();
+                //alumno.setDireccion(nuevaDireccion);
 
 
                 return ResponseEntity.ok("Alumno modificado correctamente");
@@ -82,18 +84,49 @@ public class AlumnoController {
 
         return ResponseEntity.notFound().build();
     }
+    
+    @PatchMapping("/alumnos/{id}")
+    public ResponseEntity<Void> updateSAlumno(@PathVariable int id, @RequestBody Alumnos updatedAlumno) {
+    	for (Alumnos alumno : alumnos) {
+    		if (alumno.getId() == id) {
+    			if (updatedAlumno.getNombre() != null) {
+    				alumno.setNombre(updatedAlumno.getNombre());
+    			}
+    			if (updatedAlumno.getEmail() != null) {
+    				alumno.setEmail(updatedAlumno.getEmail());
+    			}
+    			if (updatedAlumno.getCurso() != null) {
+    				alumno.setCurso(updatedAlumno.getCurso());
+    			}
+    			if (updatedAlumno.getEdad() != 0) {
+    				alumno.setEdad(updatedAlumno.getEdad());
+    			}
+    			if(updatedAlumno.getDireccion() != null) {
+    				alumno.setDireccion(updatedAlumno.getDireccion());
+    			}
+    			
+    			return ResponseEntity.noContent().build();
+    		}
+    	}
+    	
+    	return ResponseEntity.notFound().build();
+    }
 
     @DeleteMapping("/alumnos/{id}")
     public ResponseEntity<String> deleteAlumno(@PathVariable int id) {
 
         for (Alumnos alumno : alumnos ){
-            if (alumno.getId() == id) {
-                alumnos.remove(alumno);
-                return ResponseEntity.ok("Alumno eliminado");
-            }
+        	Iterator<Alumnos> iterador = alumnos.iterator();
+    		while (iterador.hasNext()) {
+    			Alumnos alumnos = iterador.next();
+    			if (alumno.getId() == id) {
+    				iterador.remove();
+    				return ResponseEntity.ok("Alumno borrado");
+    			}
+    		}
         }
-
         return ResponseEntity.notFound().build();
+
     }
 
     @GetMapping("/alumnos/direcciones")
