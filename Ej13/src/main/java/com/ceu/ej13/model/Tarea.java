@@ -1,14 +1,17 @@
 package com.ceu.ej13.model;
 
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Tarea {
 	private int id;
 	private String titulo;
 	private String descripcion;
-	private String fecha;
+	private LocalDate fecha;
 	private String estado;
-	
-	public Tarea(int id, String titulo, String descripcion, String fecha, String estado) {
-		super();
+
+	public Tarea(int id, String titulo, String descripcion, LocalDate fecha, String estado) {
 		this.id = id;
 		this.titulo = titulo;
 		this.descripcion = descripcion;
@@ -40,11 +43,11 @@ public class Tarea {
 		this.descripcion = descripcion;
 	}
 
-	public String getFecha() {
+	public LocalDate getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(String fecha) {
+	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
 

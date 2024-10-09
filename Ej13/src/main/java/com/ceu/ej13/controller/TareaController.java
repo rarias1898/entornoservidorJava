@@ -1,17 +1,12 @@
 package com.ceu.ej13.controller;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
 
+import org.springframework.cglib.core.Local;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.ceu.ej13.model.Tarea;
 
@@ -23,9 +18,9 @@ public class TareaController {
 	
 	public TareaController() {
 		
-		Tarea t1 = new Tarea(1, "tarea1", "descripcion1", "Lunes", "Pendiente");
-		Tarea t2 = new Tarea(2, "tarea2", "descripcion2", "Martes", "Pendiente");
-		Tarea t3 = new Tarea(3, "tarea3", "descripcion3", "Lunes", "Completa");
+		Tarea t1 = new Tarea(1, "tarea1", "descripcion1", LocalDate.of(2024, 10, 13), "Pendiente");
+		Tarea t2 = new Tarea(2, "tarea2", "descripcion2", LocalDate.of(2024, 10, 15), "Pendiente");
+		Tarea t3 = new Tarea(3, "tarea3", "descripcion3", LocalDate.of(2024, 10, 17), "Completa");
 		
 		tareas.add(t1);
 		tareas.add(t2);
@@ -87,6 +82,21 @@ public class TareaController {
 		}
 		return ResponseEntity.notFound().build();
 	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> deleteTarea(@PathVariable int id) {
+		for (Tarea tarea : tareas) {
+			Iterator<Tarea> iterador = tareas.iterator();
+			while (iterador.hasNext()) {
+				Tarea alumno = iterador.next();
+				if (alumno.getId() == id) {
+					iterador.remove();
+					return ResponseEntity.noContent().build();
+				}
+			}
+		}
+		return ResponseEntity.notFound().build();
+	}
 	
 	@GetMapping("/estado/{estado}")
 	public ResponseEntity<List<Tarea>> getTareaEstado(@PathVariable String estado) {
@@ -100,13 +110,34 @@ public class TareaController {
 		}
 		return ResponseEntity.ok(estados);
 	}
-	
-	
-	
-	
-	
-	
-	
+
+	@GetMapping("/proximas/{dias}")
+	public ResponseEntity<List<Tarea>> getTareaVencer(@PathVariable int dias) {
+		List<Tarea> vencers = new ArrayList<>();
+		LocalDate fechaActual = LocalDate.now();
+
+		for (Tarea tarea : tareas) {
+			long diasRestantes = ChronoUnit.DAYS.between(fechaActual, tarea.getFecha());
+
+			if (diasRestantes <= dias && diasRestantes >= 0) {
+				vencers.add(tarea);
+			}
+		}
+		return ResponseEntity.ok(vencers);
+	}
+
+	@GetMapping("contar-estado")
+	public ResponseEntity<Map<String, Integer>> contarTareasEstado() {
+		Map<String, Integer> estados = new HashMap<>();
+
+		for (Tarea tarea : tareas) {
+			String estado = tarea.getEstado();
+
+			estados.put(estado, estados.getOrDefault(estado, 0) + 1);
+		}
+		return ResponseEntity.ok(estados);
+	}
+
 	
 	
 	
