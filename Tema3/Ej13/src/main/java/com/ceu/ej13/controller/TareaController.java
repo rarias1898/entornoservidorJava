@@ -126,7 +126,7 @@ public class TareaController {
 		return ResponseEntity.ok(vencers);
 	}
 
-	@GetMapping("contar-estado")
+	@GetMapping("/contar-estado")
 	public ResponseEntity<Map<String, Integer>> contarTareasEstado() {
 		Map<String, Integer> estados = new HashMap<>();
 
