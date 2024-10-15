@@ -157,15 +157,14 @@ public class LibroController {
     }
     
     @GetMapping("/libros/autor/{numLibros}")
-    public Map<String, Integer> getAuthorMaxBooks(@PathVariable int numLibros) {
+    public ResponseEntity<Map<String, Integer>> getAuthorMaxBooks(@PathVariable int numLibros) {
     	Map<String, Integer> maxBooks = new HashMap<>();
-    	// Buscar la manera de saber cuantos libros escribe cada autor. (map ? Hashmap)
     	
     	for (Libros libro : libros) {
-    		maxBooks.put(libro.getAutor(), numLibros);
+    		String autor = libro.getAutor();
+    		
+    		maxBooks.put(autor, maxBooks.getOrDefault(autor, 0) + 1);
     	}
-    	
-    	return maxBooks;
-    	
+    	return ResponseEntity.ok(maxBooks);
     }
 }
