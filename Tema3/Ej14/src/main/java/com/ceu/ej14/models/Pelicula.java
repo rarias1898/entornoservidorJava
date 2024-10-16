@@ -1,6 +1,7 @@
 package com.ceu.ej14.models;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Pelicula {
 	private int id;
@@ -8,10 +9,9 @@ public class Pelicula {
 	private String director;
 	private LocalDate flanzamiento;
 	private int duracion;
-	private Actor actor;
-	
-	public Pelicula(int id, String titulo, String director, LocalDate flanzamiento, int duracion, Actor actor) {
-		super();
+	private List<Actor> actor;
+
+	public Pelicula(int id, String titulo, String director, LocalDate flanzamiento, int duracion, List<Actor> actor) {
 		this.id = id;
 		this.titulo = titulo;
 		this.director = director;
@@ -60,12 +60,11 @@ public class Pelicula {
 		this.duracion = duracion;
 	}
 
-	public Actor getActor() {
+	public List<Actor> getActor() {
 		return actor;
 	}
 
-	public void setActor(Actor actor) {
+	public void setActor(List<Actor> actor) {
 		this.actor = actor;
 	}
-	
 }

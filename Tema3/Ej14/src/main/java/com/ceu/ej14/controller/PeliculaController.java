@@ -27,9 +27,9 @@ public class PeliculaController {
 	private List<Pelicula> peliculas = new ArrayList<>(); 
 	
 	public PeliculaController() {
-		Pelicula p1 = new Pelicula(1, "pelicula1", "director1", LocalDate.of(1996, 03, 15), 95, new Actor(1, "actor1", "espanola"));
-		Pelicula p2 = new Pelicula(2, "pelicula2", "director2", LocalDate.of(2023, 06, 15), 75, new Actor(2, "actor1", "francesa"));
-		Pelicula p3 = new Pelicula(3, "pelicula2", "director1", LocalDate.of(2022, 01, 25), 120, new Actor(3, "actor3", "espanola"));
+		Pelicula p1 = new Pelicula(1, "pelicula1", "director1", LocalDate.of(1996, 03, 15), 95, List.of(new Actor(1, "actor1", "espanola")));
+		Pelicula p2 = new Pelicula(2, "pelicula2", "director2", LocalDate.of(2023, 06, 15), 75, List.of(new Actor(2, "actor2", "francesa")));
+		Pelicula p3 = new Pelicula(3, "pelicula2", "director1", LocalDate.of(2022, 01, 25), 120, List.of(new Actor(2, "actor2", "espanola")));
 		
 		peliculas.add(p1);
 		peliculas.add(p2);
@@ -144,30 +144,22 @@ public class PeliculaController {
 	
 	@GetMapping("/max-duration")
 	public ResponseEntity<Pelicula> getMaxDuration() {
-		
+
+		Pelicula peliMax = null;
 		int maxDuration = 0;
 		
 		for (Pelicula pelicula : peliculas) {
-			if(pelicula.getDuracion() < maxDuration) {
-				return ResponseEntity.ok(pelicula);
-			}else {
-				maxDuration = pelicula.getDuracion();
-				
+			if(pelicula.getDuracion() > maxDuration) {
+				peliMax = pelicula;
 			}
 			
 		}
-		return ResponseEntity.notFound().build();
-	}
-	
-	/*@GetMapping("/getActores")
-	public ResponseEntity<List<Actor>> getActores() {
-		
-		List<Actor> allActores = new ArrayList<>();
-		
-		for (Pelicula pelicula : peliculas) {
-			
+		if (peliMax != null) {
+			return ResponseEntity.ok(peliMax);
+		} else {
+			return ResponseEntity.notFound().build();
 		}
-	}*/
+	}
 	
 	@GetMapping("/por-actor/{actor}")
 	public ResponseEntity<List<Pelicula>> getPeliculasPorActor(@PathVariable String actor) {
@@ -175,8 +167,10 @@ public class PeliculaController {
 		List<Pelicula> porActor = new ArrayList<>();
 		
 		for (Pelicula pelicula : peliculas) {
-			if(pelicula.getActor().getNombre().equalsIgnoreCase(actor)) {
-				porActor.add(pelicula);
+			for (Actor actores : pelicula.getActor()) {
+				if (actores.getNombre().equalsIgnoreCase(actor)) {
+					porActor.add(pelicula);
+				}
 			}
 		}
 		return ResponseEntity.ok(porActor);
@@ -184,12 +178,14 @@ public class PeliculaController {
 	
 	@GetMapping("/por-nac/{nacionalidad}")
 	public ResponseEntity<List<Actor>> getActoresPorNac(@PathVariable String nacionalidad) {
-		
+
 		List<Actor> porNac = new ArrayList<>();
-		
+
 		for (Pelicula pelicula : peliculas) {
-			if(pelicula.getActor().getNacionalidad().equalsIgnoreCase(nacionalidad)) {
-				porNac.add(pelicula.getActor());
+			for (Actor actores : pelicula.getActor()) {
+				if (actores.getNacionalidad().equalsIgnoreCase(nacionalidad)) {
+					porNac.add(actores);
+				}
 			}
 		}
 		return ResponseEntity.ok(porNac);
