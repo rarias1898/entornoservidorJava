@@ -2,9 +2,7 @@ package com.ceu.ej14.controller;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,9 +25,9 @@ public class PeliculaController {
 	private List<Pelicula> peliculas = new ArrayList<>(); 
 	
 	public PeliculaController() {
-		Pelicula p1 = new Pelicula(1, "pelicula1", "director1", LocalDate.of(1996, 03, 15), 95, List.of(new Actor(1, "actor1", "espanola")));
+		Pelicula p1 = new Pelicula(1, "pelicula1", "director1", LocalDate.of(1996, 03, 15), 95, List.of(new Actor(1, "actor1", "espanola"), new Actor(1, "actor2", "francesa")));
 		Pelicula p2 = new Pelicula(2, "pelicula2", "director2", LocalDate.of(2023, 06, 15), 75, List.of(new Actor(2, "actor2", "francesa")));
-		Pelicula p3 = new Pelicula(3, "pelicula2", "director1", LocalDate.of(2022, 01, 25), 120, List.of(new Actor(2, "actor2", "espanola")));
+		Pelicula p3 = new Pelicula(3, "pelicula3", "director1", LocalDate.of(2022, 01, 25), 120, List.of(new Actor(3, "actor2", "espanola")));
 		
 		peliculas.add(p1);
 		peliculas.add(p2);
@@ -159,6 +157,36 @@ public class PeliculaController {
 		} else {
 			return ResponseEntity.notFound().build();
 		}
+	}
+
+	@GetMapping("/con-mas-de/{numeroPeliculas}")
+	public ResponseEntity<Map<String, Integer>> getDirectoresConMasDeX(@PathVariable int numeroPeliculas) {
+		Map<String, Integer> contadorDirectores = new HashMap<>();
+
+		for (Pelicula pelicula : peliculas) {
+			String director = pelicula.getDirector();
+
+			contadorDirectores.put(director, contadorDirectores.getOrDefault(director, 0) + 1);
+		}
+
+		Map<String, Integer> contadorDirectoresX = new HashMap<>();
+
+		for (Map.Entry<String, Integer> entry : contadorDirectores.entrySet()) {
+			if (entry.getValue() > numeroPeliculas) {
+				contadorDirectoresX.put(entry.getKey(), entry.getValue());
+			}
+		}
+		return ResponseEntity.ok(contadorDirectoresX);
+	}
+
+	@GetMapping("/actores-sin-repetir")
+	public ResponseEntity<Set<Actor>> getActoresSinRepetir() {
+		Set<Actor> actoresSinRepetir = new HashSet<>();
+
+		for (Pelicula pelicula : peliculas) {
+			actoresSinRepetir.addAll(pelicula.getActor());
+		}
+		return ResponseEntity.ok(actoresSinRepetir);
 	}
 	
 	@GetMapping("/por-actor/{actor}")
