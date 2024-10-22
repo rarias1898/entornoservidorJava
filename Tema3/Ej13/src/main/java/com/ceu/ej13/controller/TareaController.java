@@ -18,7 +18,7 @@ public class TareaController {
 	public TareaController() {
 		
 		Tarea t1 = new Tarea(1, "tarea1", "descripcion1 hola", LocalDate.of(2024, 10, 22), "Pendiente");
-		Tarea t2 = new Tarea(2, "tarea2", "descripcion2", LocalDate.of(2024, 10, 15), "Pendiente");
+		Tarea t2 = new Tarea(2, "tarea2", "descripcion2", LocalDate.of(2024, 10, 20), "Pendiente");
 		Tarea t3 = new Tarea(3, "tarea3", "descripcion3", LocalDate.of(2024, 10, 17), "Pendiente");
 		
 		tareas.add(t1);
