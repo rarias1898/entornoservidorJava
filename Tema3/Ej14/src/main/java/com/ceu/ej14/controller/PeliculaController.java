@@ -198,6 +198,7 @@ public class PeliculaController {
 			for (Actor actores : pelicula.getActor()) {
 				if (actores.getNombre().equalsIgnoreCase(actor)) {
 					porActor.add(pelicula);
+					break;
 				}
 			}
 		}
@@ -213,6 +214,7 @@ public class PeliculaController {
 			for (Actor actores : pelicula.getActor()) {
 				if (actores.getNacionalidad().equalsIgnoreCase(nacionalidad)) {
 					porNac.add(actores);
+					break;
 				}
 			}
 		}

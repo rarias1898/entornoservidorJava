@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
-import org.springframework.cglib.core.Local;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,9 +17,9 @@ public class TareaController {
 	
 	public TareaController() {
 		
-		Tarea t1 = new Tarea(1, "tarea1", "descripcion1", LocalDate.of(2024, 10, 13), "Pendiente");
+		Tarea t1 = new Tarea(1, "tarea1", "descripcion1 hola", LocalDate.of(2024, 10, 22), "Pendiente");
 		Tarea t2 = new Tarea(2, "tarea2", "descripcion2", LocalDate.of(2024, 10, 15), "Pendiente");
-		Tarea t3 = new Tarea(3, "tarea3", "descripcion3", LocalDate.of(2024, 10, 17), "Completa");
+		Tarea t3 = new Tarea(3, "tarea3", "descripcion3", LocalDate.of(2024, 10, 17), "Pendiente");
 		
 		tareas.add(t1);
 		tareas.add(t2);
@@ -139,6 +138,26 @@ public class TareaController {
 	}
 
 	
+	@GetMapping("/por-desc/{descripcion}")
+	public ResponseEntity<List<Tarea>> getTareaDescr(@PathVariable String descripcion) {
+		List<Tarea> filtroDesc = new ArrayList<>();
+		for (Tarea tarea : tareas) {
+			if (tarea.getDescripcion().contains(descripcion)) {
+				filtroDesc.add(tarea);
+			}
+		}
+		return ResponseEntity.ok(filtroDesc);
+	}
 	
+	@PatchMapping("/marcar-completadas")
+	public ResponseEntity<Void> tareasCompletadas() {
+		LocalDate fechaActual = LocalDate.now();
+		for (Tarea tarea : tareas) {
+			if(tarea.getFecha().isAfter(fechaActual) || tarea.getFecha().isEqual(fechaActual)) {
+				tarea.setEstado("Completa");
+			}
+		}
+		return ResponseEntity.noContent().build();
+	}
 	
 }
