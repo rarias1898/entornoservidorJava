@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -67,6 +68,18 @@ public class TiendaController {
 	}
 	
 	
-	
-	
+	@PutMapping("/edit")
+	public ResponseEntity<Void> editAlbum(@RequestBody Album editedAlbum) {
+		for (Album album : albums) {
+			if (album.getId() == editedAlbum.getId()) {
+				album.setTitulo(editedAlbum.getTitulo());
+				album.setArtistaPrincipal(editedAlbum.getArtistaPrincipal());
+				album.setAnioLanzamiento(editedAlbum.getAnioLanzamiento());
+				album.setCancion(editedAlbum.getCancion());
+
+				return ResponseEntity.noContent().build();
+			}
+		}
+		return ResponseEntity.notFound().build();
+	}
 }
