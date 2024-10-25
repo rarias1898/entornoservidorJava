@@ -9,14 +9,16 @@ public class Album {
 	private String artistaPrincipal;
 	private LocalDate anioLanzamiento;
 	private List<Cancion> cancion;
-	
-	public Album(int id, String titulo, String artistaPrincipal, LocalDate anioLanzamiento, List<Cancion> cancion) {
-		super();
+	private List<Artista> artista;
+
+	public Album(int id, String titulo, String artistaPrincipal, LocalDate anioLanzamiento, List<Cancion> cancion,
+			List<Artista> artista) {
 		this.id = id;
 		this.titulo = titulo;
 		this.artistaPrincipal = artistaPrincipal;
 		this.anioLanzamiento = anioLanzamiento;
 		this.cancion = cancion;
+		this.artista = artista;
 	}
 
 	public int getId() {
@@ -58,7 +60,14 @@ public class Album {
 	public void setCancion(List<Cancion> cancion) {
 		this.cancion = cancion;
 	}
-	
-	
+
+	public List<Artista> getArtista() {
+		return artista;
+	}
+
+	public void setArtista(List<Artista> artista) {
+		this.artista = artista;
+	}
+
 	
 }
