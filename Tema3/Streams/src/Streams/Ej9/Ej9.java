@@ -12,7 +12,7 @@ public class Ej9 {
 		
 		Persona p1 = new Persona("Angel", 28);
 		Persona p2 = new Persona("Ana", 24);
-		Persona p3 = new Persona("Pablo", 22);
+		Persona p3 = new Persona("Pablo", 29);
 		Persona p4 = new Persona("Cristian", 17);
 		Persona p5 = new Persona("Maria", 45);
 		
