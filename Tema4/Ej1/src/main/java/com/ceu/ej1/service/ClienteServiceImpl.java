@@ -38,4 +38,13 @@ public class ClienteServiceImpl {
 	public void actualizarCliente(int id, Cliente cliente) {
 		repository.actualizarCliente(id, cliente);
 	}
+
+	@Transactional
+	public void actualizarClienteParcial(int id, Cliente editClient) {
+		repository.ActualizarClienteParcial(id, editClient);
+	}
+
+	public Cliente getClientesNombre(String nombre) {
+		return repository.getClientesNombre(nombre);
+	}
 }

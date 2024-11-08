@@ -39,7 +39,32 @@ public class ClienteRepository {
 	public void actualizarCliente(int id, Cliente cliente) {
 		Cliente client = getCliente(id);
 		
+		client.setNombre(cliente.getNombre());
+		client.setApellidos(cliente.getApellidos());
 		
 		entityManager.merge(client);
+	}
+
+	public void ActualizarClienteParcial(int id, Cliente editClient) {
+		Cliente client = getCliente(id);
+		
+		if(editClient.getNombre() != null) {
+			client.setNombre(editClient.getNombre());
+		}
+		
+		if(editClient.getApellidos() != null) {
+			client.setApellidos(editClient.getApellidos());
+		}
+		
+		entityManager.merge(client);
+	}
+
+	public Cliente getClientesNombre(String nombre) {
+		String jpql = "SELECT c FROM Cliente c WHERE c.nombre LIKE :nombre";
+		
+		Query<Cliente> query = (Query<Cliente>) entityManager.createQuery(jpql, Cliente.class);
+		query.setParameter("nombre", "%" + nombre + "%");
+		
+		return query.getSingleResult();
 	}
 }
