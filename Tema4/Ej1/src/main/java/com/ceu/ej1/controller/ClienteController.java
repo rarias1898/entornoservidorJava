@@ -33,7 +33,12 @@ public class ClienteController {
 	@GetMapping("/{id}")
 	public ResponseEntity<Cliente> getCliente(@PathVariable int id) {
 		Cliente cliente = service.getCliente(id);
-		return ResponseEntity.ok(cliente);
+		
+		if(cliente == null) {
+			return ResponseEntity.notFound().build();
+		}else {
+			return ResponseEntity.ok(cliente);			
+		}
 	}
 	
 	@PostMapping
@@ -50,6 +55,7 @@ public class ClienteController {
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<Void> actualizarCliente(@PathVariable int id, @RequestBody Cliente editClient) {
+		// Utilizar el id del PathVariable para actualizar el cliente editCliente.setId(id)
 		service.actualizarCliente(id, editClient);
 		return ResponseEntity.noContent().build();
 	}
