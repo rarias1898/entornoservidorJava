@@ -104,7 +104,12 @@ public class ProductController {
 	}
 	
 	@PostMapping("/product-list")
-	public ResponseEntity<List<Product>> addProductList() {
-		return null;
+	public ResponseEntity<List<Product>> addProductList(@RequestBody(required = false) List<Product> listaProductos) {		
+		if (listaProductos == null || listaProductos.isEmpty()) {
+			return ResponseEntity.noContent().build();
+		}
+		
+		List<Product> pList = service.addProductList(listaProductos);
+		return ResponseEntity.ok(pList);
 	}
 }

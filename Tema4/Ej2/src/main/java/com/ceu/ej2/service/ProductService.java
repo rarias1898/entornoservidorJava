@@ -51,4 +51,9 @@ public class ProductService {
 	public List<Product> getProductByPriceRange(int price1, int price2) {
 		return repository.getProductByPriceRange(price1, price2);
 	}
+
+	@Transactional
+	public List<Product> addProductList(List<Product> listaProductos) {
+		return repository.addProductList(listaProductos);
+	}
 }

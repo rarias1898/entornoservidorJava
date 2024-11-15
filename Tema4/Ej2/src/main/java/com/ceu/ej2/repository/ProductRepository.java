@@ -66,4 +66,11 @@ public class ProductRepository {
 		
 		return query.getResultList();
 	}
+
+	public List<Product> addProductList(List<Product> listaProductos) {
+		for(Product product : listaProductos) {
+			entityManager.merge(product);
+		}
+		return listaProductos;
+	}
 }
