@@ -2,6 +2,8 @@ package com.ceu.ej4.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -69,6 +71,18 @@ public class HotelService {
 
 	@Transactional
 	public List<Hotel> addListaHoteles(List<Hotel> listaHoteles) {
-		return null;
+		List<Hotel> misHoteles = getHotels();
+		Set<String> nombres = misHoteles.stream()
+				.map(x -> x.getNombre())
+				.collect(Collectors.toSet());
+		
+		for (Hotel hotel : listaHoteles) {
+			if (nombres.contains(hotel.getNombre())) {
+				return null;
+			}else {
+				addHotel(hotel);
+			}
+		}
+		return listaHoteles;
 	}
 }
