@@ -101,7 +101,7 @@ public class AnimalController {
 			return ResponseEntity.ok(mapaRes);
 		}
 	}
-	
+	// prueba git
 	@GetMapping("/recientes/{anyo}")
 	public ResponseEntity<List<Map<String, Object>>> getAnimalesRecientes(@PathVariable int anyo) {
 		List<Animal> listaAnimales = service.getAnimalesRecientes(anyo);
