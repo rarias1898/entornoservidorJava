@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ceu.ej1.model.Cliente;
-import com.ceu.ej1.service.ClienteServiceImpl;
+import com.ceu.ej1.service.ClienteService;
 
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
 	
 	@Autowired
-	private ClienteServiceImpl service;
+	private ClienteService service;
 
 	@GetMapping
 	public ResponseEntity<List<Cliente>> getClientes() {

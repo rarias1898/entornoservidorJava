@@ -11,7 +11,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
 @Repository
-public class ClienteRepository {
+public class ClienteRepositoryImpl implements ClienteRepository {
 	
 	@PersistenceContext
 	private EntityManager entityManager;

@@ -11,7 +11,7 @@ import com.ceu.ej1.repository.ClienteRepository;
 import jakarta.transaction.Transactional;
 
 @Service
-public class ClienteServiceImpl {
+public class ClienteServiceImpl implements ClienteService {
 	
 	@Autowired
 	private ClienteRepository repository;
