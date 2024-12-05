@@ -18,4 +18,6 @@ public interface ClienteService {
 
 	void updateDireccion(int id, Cliente updatedCliente);
 
+	void updateToSevilla(Cliente updatedClient);
+
 }

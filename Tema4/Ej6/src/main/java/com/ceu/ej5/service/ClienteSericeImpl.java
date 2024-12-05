@@ -81,4 +81,22 @@ public class ClienteSericeImpl implements ClienteService {
 		repository.updateCliente(miCliente);
 		
 	}
+
+	@Transactional
+	@Override
+	public void updateToSevilla(Cliente updatedClient) {
+		List<Cliente> listaClientes = getClientes().stream().filter(x -> x.getNombre().startsWith("a") || x.getNombre().startsWith("A")).toList();
+		
+		for (Cliente cliente : listaClientes) {
+			if (updatedClient.getDireccion().getCiudad() != null) {
+				cliente.getDireccion().setCiudad(updatedClient.getDireccion().getCiudad());
+			}
+			
+			if (updatedClient.getDireccion().getCalle() == null) {
+				cliente.getDireccion().setCalle(cliente.getDireccion().getCalle());
+			}
+			
+			repository.updateCliente(updatedClient);
+		}
+	}
 }

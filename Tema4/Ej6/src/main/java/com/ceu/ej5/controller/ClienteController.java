@@ -79,4 +79,12 @@ public class ClienteController {
 		
 		return ResponseEntity.noContent().build();
 	}
+	
+	// 7 - Actualizar la ciudad a ‘Sevilla’ de todos los clientes cuyo nombre empiece por ‘A’ o ‘a’.
+	@PatchMapping("/to-sevilla")
+	public ResponseEntity<Void> updateToSevilla(@RequestBody Cliente updatedClient) {
+		service.updateToSevilla(updatedClient);
+		
+		return ResponseEntity.noContent().build();
+	}
 }
