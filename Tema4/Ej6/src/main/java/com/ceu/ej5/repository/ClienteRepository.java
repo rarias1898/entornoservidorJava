@@ -16,5 +16,7 @@ public interface ClienteRepository {
 
 	void deleteCliente(Cliente client);
 
+	List<Cliente> getClientesByCiudad(String ciudad);
+
 
 }

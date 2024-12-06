@@ -18,6 +18,10 @@ public interface ClienteService {
 
 	void updateDireccion(int id, Cliente updatedCliente);
 
-	void updateToSevilla(Cliente updatedClient);
+	void updateToSevilla();
+
+	void updateWithParameters(String letra, String ciudad);
+
+	List<Cliente> getClientesByCiudad(String ciudad);
 
 }

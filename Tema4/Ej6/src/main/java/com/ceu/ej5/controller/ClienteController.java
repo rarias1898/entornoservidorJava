@@ -82,9 +82,32 @@ public class ClienteController {
 	
 	// 7 - Actualizar la ciudad a ‘Sevilla’ de todos los clientes cuyo nombre empiece por ‘A’ o ‘a’.
 	@PatchMapping("/to-sevilla")
-	public ResponseEntity<Void> updateToSevilla(@RequestBody Cliente updatedClient) {
-		service.updateToSevilla(updatedClient);
+	public ResponseEntity<Void> updateToSevilla() {
+		service.updateToSevilla();
 		
 		return ResponseEntity.noContent().build();
 	}
+	
+	// 8 - Crear un nuevo método similar al anterior, pero para que la ciudad y la letra de inicio sean
+	//parámetros. Es decir, sirva para cualquier letra y ciudad.
+	@PatchMapping("/{letra}/{ciudad}")
+	public ResponseEntity<Void> updateWithParameters(@PathVariable String letra, @PathVariable String ciudad) {
+		service.updateWithParameters(letra, ciudad);
+		
+		return ResponseEntity.noContent().build();
+	}
+	
+	// 9 - Buscar Clientes por Ciudad. Dada una ciudad, devolver el listado de clientes de dicha
+	//ciudad.
+	@GetMapping("/by/{ciudad}")
+	public ResponseEntity<List<Cliente>> getClientesByCiudad(@PathVariable String ciudad) {
+		List<Cliente> listaClientes = service.getClientesByCiudad(ciudad);
+		
+		if (listaClientes.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		}else {
+			return ResponseEntity.ok(listaClientes);			
+		}
+	}
+	
 }

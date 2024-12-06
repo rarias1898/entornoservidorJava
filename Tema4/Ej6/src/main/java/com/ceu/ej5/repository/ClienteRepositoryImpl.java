@@ -46,4 +46,15 @@ public class ClienteRepositoryImpl implements ClienteRepository {
 		entityManager.remove(client);
 	}
 
+	@Override
+	public List<Cliente> getClientesByCiudad(String ciudad) {
+		String jpql = "SELECT c FROM Cliente c WHERE c.direccion.ciudad = :ciudad";
+		
+		Query<Cliente> query = (Query<Cliente>) entityManager.createQuery(jpql, Cliente.class);
+		
+		query.setParameter("ciudad", ciudad);
+		
+		return query.getResultList();
+	}
+
 }
