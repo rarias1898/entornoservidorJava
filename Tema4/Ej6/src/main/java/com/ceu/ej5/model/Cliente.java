@@ -60,4 +60,9 @@ public class Cliente {
 	public void setDireccion(Direccion direccion) {
 		this.direccion = direccion;
 	}
+
+	@Override
+	public String toString() {
+		return "Cliente [id=" + id + ", nombre=" + nombre + ", direccion=" + direccion + "]";
+	}
 }

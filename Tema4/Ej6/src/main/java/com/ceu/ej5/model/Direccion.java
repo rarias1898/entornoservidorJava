@@ -56,4 +56,9 @@ public class Direccion {
 	public void setCiudad(String ciudad) {
 		this.ciudad = ciudad;
 	}
+
+	@Override
+	public String toString() {
+		return "Direccion [id=" + id + ", calle=" + calle + ", ciudad=" + ciudad + "]";
+	}
 }
