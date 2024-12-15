@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
+import com.ceu.ej8.model.Perfil;
 import com.ceu.ej8.model.Usuario;
 
 import jakarta.persistence.EntityManager;
@@ -44,5 +45,22 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
 	public void deleteUsuario(Usuario usuario) {
 		entityManager.remove(usuario);
 		
+	}
+
+	@Override
+	public Perfil getPerfil(int id) {
+		String jpql = "SELECT u.perfil FROM Usuario u WHERE u.id = :id";
+		Query<Perfil> query = (Query<Perfil>) entityManager.createQuery(jpql, Perfil.class);
+		query.setParameter("id", id);
+		return query.getSingleResult();
+	}
+
+	@Override
+	public List<Usuario> getUsuariosContainsEdad() {
+		String edad = "edad";
+		String jpql = "SELECT u FROM Usuario u WHERE u.perfil.bio LIKE :edad";
+		Query<Usuario> query = (Query<Usuario>) entityManager.createQuery(jpql, Usuario.class);
+		query.setParameter("edad", "%" + edad + "%");
+		return query.getResultList();
 	}
 }
