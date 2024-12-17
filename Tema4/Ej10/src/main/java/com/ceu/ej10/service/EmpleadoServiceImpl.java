@@ -37,6 +37,35 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 	public void updateEmpleado(Empleado updatedEmpleado, int id) {
 		Empleado miEmpleado = getEmpleadoById(id);
 		
+		if (miEmpleado != null) {
+			miEmpleado.setNombre(updatedEmpleado.getNombre());
+			miEmpleado.setEmail(updatedEmpleado.getEmail());
+			miEmpleado.setPuesto(updatedEmpleado.getPuesto());
+			miEmpleado.getOficina().setTelefono(updatedEmpleado.getOficina().getTelefono());
+			miEmpleado.getOficina().setUbicacion(updatedEmpleado.getOficina().getUbicacion());
+		}
 		
+		repository.updateEmpleado(miEmpleado);
+	}
+
+	@Override
+	@Transactional
+	public void deleteEmpleado(int id) {
+		Empleado empleado = getEmpleadoById(id);
+		
+		repository.deleteEmpleado(empleado);
+	}
+
+	@Override
+	public List<Empleado> getEmpleadoByPuesto(String puesto) {
+		return repository.getEmpleadoByPuesto(puesto);
+	}
+
+	@Override
+	public List<Empleado> getEmpleadoNoOffice() {
+		List<Empleado> listaEmpleados = getEmpleados().stream()
+				.filter(x -> x.getOficina() == null).toList();
+		
+		return listaEmpleados;
 	}
 }

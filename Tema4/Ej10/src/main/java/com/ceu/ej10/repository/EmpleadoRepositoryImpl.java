@@ -32,4 +32,23 @@ public class EmpleadoRepositoryImpl implements EmpleadoRepository {
 	public Empleado getEmpleadoById(int id) {
 		return entityManager.find(Empleado.class, id);
 	}
+
+	@Override
+	public void updateEmpleado(Empleado miEmpleado) {
+		entityManager.merge(miEmpleado);
+	}
+
+	@Override
+	public void deleteEmpleado(Empleado empleado) {
+		entityManager.remove(empleado);
+	}
+
+	@Override
+	public List<Empleado> getEmpleadoByPuesto(String puesto) {
+		String jpql = "SELECT e FROM Empleado e WHERE e.puesto LIKE :puesto";
+		Query<Empleado> query = (Query<Empleado>) entityManager.createQuery(jpql, Empleado.class);
+		query.setParameter("puesto", "%" + puesto + "%");
+		
+		return query.getResultList();
+	}
 }

@@ -12,4 +12,10 @@ public interface EmpleadoRepository {
 
 	Empleado getEmpleadoById(int id);
 
+	void updateEmpleado(Empleado miEmpleado);
+
+	void deleteEmpleado(Empleado empleado);
+
+	List<Empleado> getEmpleadoByPuesto(String puesto);
+
 }

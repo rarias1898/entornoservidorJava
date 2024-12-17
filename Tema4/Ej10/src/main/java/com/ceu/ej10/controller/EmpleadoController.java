@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ceu.ej10.model.Empleado;
 import com.ceu.ej10.service.EmpleadoService;
+
 
 @RestController
 @RequestMapping("/api/empleado")
@@ -55,11 +57,44 @@ public class EmpleadoController {
 	}
 	
 	// 4 - Actualizar la información de un empleado, incluyendo la oficina asociada.
-	@PutMapping()
+	@PutMapping("/{id}")
 	public ResponseEntity<Void> updateEmpleado(@RequestBody Empleado updatedEmpleado, @PathVariable int id) {
 		service.updateEmpleado(updatedEmpleado, id);
 		
 		return ResponseEntity.noContent().build();
+	}
+	
+	// 5 - Eliminar un empleado por su id.
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> deleteEmpleado(@PathVariable int id) {
+		service.deleteEmpleado(id);
+		
+		return ResponseEntity.noContent().build();
+	}
+	
+	// 6 - Devolver todos los empleados que tengan un puesto especifico.
+	@GetMapping("/puesto/{puesto}")
+	public ResponseEntity<List<Empleado>> getEmpleadoByPuesto(@PathVariable String puesto) {
+		List<Empleado> listaEmpleados = service.getEmpleadoByPuesto(puesto);
+		
+		if (listaEmpleados.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		}else {
+			return ResponseEntity.ok(listaEmpleados);
+		}
+	}
+	
+	
+	// 7 - Devolver todos los empleados que no tengan oficina.
+	@GetMapping("/no-office")
+	public ResponseEntity<List<Empleado>> getEmpleadoNoOffice() {
+		List<Empleado> listaEmpleados = service.getEmpleadoNoOffice();
+		
+		if (listaEmpleados.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		}else {
+			return ResponseEntity.ok(listaEmpleados);
+		}
 	}
 	
 }

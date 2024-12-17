@@ -14,4 +14,10 @@ public interface EmpleadoService {
 
 	void updateEmpleado(Empleado updatedEmpleado, int id);
 
+	void deleteEmpleado(int id);
+
+	List<Empleado> getEmpleadoByPuesto(String puesto);
+
+	List<Empleado> getEmpleadoNoOffice();
+
 }
