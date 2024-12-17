@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,16 +22,20 @@ public class Perfil {
 	
 	@Column(name = "estado")
 	private String estado;
+	
+	@OneToOne(mappedBy = "perfil")
+	private Usuario usuario;
 
 	public Perfil() {
 		super();
 	}
 
-	public Perfil(int id, String bio, String estado) {
+	public Perfil(int id, String bio, String estado, Usuario usuario) {
 		super();
 		this.id = id;
 		this.bio = bio;
 		this.estado = estado;
+		this.usuario = usuario;
 	}
 
 	public int getId() {
@@ -55,5 +60,13 @@ public class Perfil {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+	
+	public Usuario getUsuario(Usuario usuario) {
+		return usuario;
+	}
+	
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 }
