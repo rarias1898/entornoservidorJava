@@ -1,6 +1,7 @@
 package com.ceu.ej10.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -60,5 +61,33 @@ public class OficinaController {
 		service.deleteOficina(id);
 		
 		return ResponseEntity.noContent().build();
+	}
+	
+	// 5 - Contar el número de empleados de una oficinas.
+	@GetMapping("/empleados/{id}")
+	public ResponseEntity<Long> countEmpleadosOficina(@PathVariable int id) {
+		long numEmpleados = service.countEmpleadosOficina(id);
+		
+		return ResponseEntity.ok(numEmpleados);
+	}
+	
+	// 6 - Devolver un mapa donde la clave es el id de la oficina y el valor el número de empleados que tiene esa oficina.
+	@GetMapping("/mapa-empleados/{id}")
+	public ResponseEntity<Map<Integer, Long>> getMapNumeroEmpleados(@PathVariable int id) {
+		Map<Integer, Long> mapaOficina = service.getMapNumeroEmpleados(id);
+		
+		return ResponseEntity.ok(mapaOficina);
+	}
+	
+	// 7 - Devolver el listado de oficinas de más de N empleados.
+	@GetMapping("/mas-de/{numEmpleados}")
+	public ResponseEntity<List<Oficina>> getOficinaConMasDeNEmpleados(@PathVariable int numEmpleados) {
+		List<Oficina> listaOficinas = service.getOficinaConMasDeNEmpleados(numEmpleados);
+		
+		if (listaOficinas.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		}else {
+			return ResponseEntity.ok(listaOficinas);
+		}
 	}
 }

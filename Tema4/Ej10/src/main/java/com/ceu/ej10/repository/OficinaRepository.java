@@ -14,4 +14,8 @@ public interface OficinaRepository {
 
 	void deleteOficina(Oficina oficina);
 
+	long countEmpleadosOficina(int id);
+
+	List<Oficina> getOficinaConMasDeNEmpleados(int numEmpleados);
+
 }

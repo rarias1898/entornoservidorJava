@@ -1,6 +1,8 @@
 package com.ceu.ej10.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,5 +40,25 @@ public class OficinaServiceImpl implements OficinaService {
 		Oficina oficina = getOficinaById(id);
 		
 		repository.deleteOficina(oficina);
+	}
+
+	@Override
+	public long countEmpleadosOficina(int id) {
+		return repository.countEmpleadosOficina(id);
+	}
+
+	@Override
+	public Map<Integer, Long> getMapNumeroEmpleados(int id) {
+		long conteo = countEmpleadosOficina(id);
+		
+		Map<Integer, Long> mapaEmpleados = new HashMap<>();
+		mapaEmpleados.put(id, conteo);
+		
+		return mapaEmpleados;
+	}
+
+	@Override
+	public List<Oficina> getOficinaConMasDeNEmpleados(int numEmpleados) {
+		return repository.getOficinaConMasDeNEmpleados(numEmpleados);
 	}
 }
