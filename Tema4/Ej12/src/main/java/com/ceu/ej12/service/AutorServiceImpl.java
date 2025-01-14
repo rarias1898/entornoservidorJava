@@ -27,4 +27,32 @@ public class AutorServiceImpl implements AutorService {
 		 repository.addAutor(a1);
 	}
 
+	@Override
+	public Autor getAutorById(int id) {
+		return repository.getAutorById(id);
+	}
+
+	@Override
+	@Transactional
+	public Autor updateAutor(int id, Autor modifAutor) {
+		Autor autor1 = getAutorById(id);
+		
+		autor1.setNombre(modifAutor.getNombre());
+		
+		return repository.updateAutor(autor1);
+	}
+
+	@Override
+	@Transactional
+	public void deleteAutor(int id) {
+		Autor autor = getAutorById(id);
+		
+		if (autor != null) {
+			repository.deleteAutor(autor);
+		}
+		
+	}
+
+	
+
 }

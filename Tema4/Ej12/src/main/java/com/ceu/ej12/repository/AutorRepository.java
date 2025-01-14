@@ -10,4 +10,10 @@ public interface AutorRepository {
 
 	void addAutor(Autor a1);
 
+	Autor getAutorById(int id);
+
+	Autor updateAutor(Autor autor1);
+
+	void deleteAutor(Autor autor);
+
 }

@@ -35,11 +35,10 @@ public class Autor {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Autor(int id, String nombre){//, List<Libro> listaLibros) {
+	public Autor( String nombre) {
 		super();
-		this.id = id;
 		this.nombre = nombre;
-		//this.listaLibros = listaLibros;
+		this.listaLibros = new ArrayList<>();
 	}
 
 	public int getId() {
@@ -65,4 +64,11 @@ public class Autor {
 	public void setListaLibros(List<Libro> listaLibros) {
 		this.listaLibros = listaLibros;
 	}
+
+	@Override
+	public String toString() {
+		return "Autor [id=" + id + ", nombre=" + nombre + ", listaLibros=" + listaLibros + "]";
+	}
+	
+	
 }

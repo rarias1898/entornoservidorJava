@@ -26,8 +26,24 @@ public class AutorRepositoryImpl implements AutorRepository {
 	@Override
 	public void addAutor(Autor a1) {
 		entityManager.persist(a1);
+	}
+
+	@Override
+	public Autor getAutorById(int id) {
+		Autor autor = entityManager.find(Autor.class, id);
+		return autor;
+	}
+
+	@Override
+	public Autor updateAutor(Autor autor1) {
+		Autor autor = entityManager.merge(autor1);
+		return autor;
+	}
+
+	@Override
+	public void deleteAutor(Autor autor) {
+		entityManager.remove(autor);
 		
-		//return a1;
 	}
 
 }
