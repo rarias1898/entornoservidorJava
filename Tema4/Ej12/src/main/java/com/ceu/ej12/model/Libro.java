@@ -23,9 +23,8 @@ public class Libro {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Libro(int id, String titulo) {
+	public Libro(String titulo) {
 		super();
-		this.id = id;
 		this.titulo = titulo;
 	}
 

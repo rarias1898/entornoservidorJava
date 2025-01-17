@@ -3,6 +3,7 @@ package com.ceu.ej12.service;
 import java.util.List;
 
 import com.ceu.ej12.model.Autor;
+import com.ceu.ej12.model.Libro;
 
 public interface AutorService {
 
@@ -15,4 +16,8 @@ public interface AutorService {
 	Autor updateAutor(int id, Autor modifAutor);
 
 	void deleteAutor(int id);
+
+	void addLibroToAutor(int id, Libro l1);
+
+	void deleteLibroFromAutor(int id, int id2);
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ceu.ej12.model.Autor;
+import com.ceu.ej12.model.Libro;
 import com.ceu.ej12.repository.AutorRepository;
 
 import jakarta.transaction.Transactional;
@@ -51,6 +52,27 @@ public class AutorServiceImpl implements AutorService {
 			repository.deleteAutor(autor);
 		}
 		
+	}
+
+	@Override
+	@Transactional
+	public void addLibroToAutor(int id, Libro l1) {
+		Autor autor = getAutorById(id);
+		
+		if (autor != null) {
+			autor.getListaLibros().add(l1);
+			updateAutor(autor.getId(), autor);
+		}
+		
+	}
+
+	@Override
+	@Transactional
+	public void deleteLibroFromAutor(int id, int id2) {
+		Autor autor = getAutorById(id);
+		
+		autor.setListaLibros(autor.getListaLibros().stream().filter(x -> x.getId() != id2).toList());
+		updateAutor(autor.getId(), autor);
 	}
 
 	
