@@ -49,17 +49,24 @@ public class CursoServiceImpl implements CursoService {
 	public List<Curso> getCursoByWord(String string) {
 		return repository.getCursoByWord(string);
 	}
+	
+	public Estudiante getEstudianteById(Integer id) {
+		return repository.getEstudianteById(id);
+	}
 
 	@Override
 	@Transactional
 	public void deleteEstudianteFromCurso(Integer id, Estudiante e1) {
-		
 		Curso curso = getCursoById(id);
+		Estudiante estudiante = getEstudianteById(e1.getId());
 		
-		//estu mapeado
+		if (curso.getEstudiantes().contains(estudiante)) {
+			curso.getEstudiantes().remove(estudiante);
+			repository.save(curso);			
+		}else {
+			throw new RuntimeException("El estudiante no pertenece al curso con ID: " + id);
+		}
 		
-		curso.getEstudiantes().remove(e1);
-		repository.save(curso);
 		
 	}
 }

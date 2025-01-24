@@ -6,6 +6,7 @@ import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import com.ceu.ej15.model.Curso;
+import com.ceu.ej15.model.Estudiante;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -45,5 +46,11 @@ public class CursoRepositoryImpl implements CursoRepository {
 		Query<Curso> query = (Query<Curso>) entityManager.createQuery(jpql, Curso.class);
 		query.setParameter("string", "%" + string + "%" );
 		return query.getResultList();
+	}
+
+	@Override
+	public Estudiante getEstudianteById(Integer id) {
+		Estudiante estudiante = entityManager.find(Estudiante.class, id);
+		return estudiante;
 	}
 }
