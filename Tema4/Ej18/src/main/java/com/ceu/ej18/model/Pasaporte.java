@@ -57,5 +57,11 @@ public class Pasaporte {
 	public void setPersona(Persona persona) {
 		this.persona = persona;
 	}
+
+	@Override
+	public String toString() {
+		return "Pasaporte [id=" + id + ", numero=" + numero + "]";
+	}
+	
 	
 }

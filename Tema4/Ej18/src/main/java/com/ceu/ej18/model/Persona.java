@@ -80,6 +80,11 @@ public class Persona {
 	public void setProyectos(List<Proyecto> proyectos) {
 		this.proyectos = proyectos;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Persona [id=" + id + ", nombre=" + nombre + ", pasaporte=" + pasaporte + ", proyectos=" + proyectos
+				+ "]";
+	}	
 	
 }

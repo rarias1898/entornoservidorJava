@@ -6,4 +6,6 @@ public interface PasaporteService {
 
 	void addPasaporte(Pasaporte pasa1);
 
+	void addPasaporteToPersona(Integer id, Integer id2);
+
 }

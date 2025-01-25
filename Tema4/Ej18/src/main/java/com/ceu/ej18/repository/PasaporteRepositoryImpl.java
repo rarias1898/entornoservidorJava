@@ -3,6 +3,7 @@ package com.ceu.ej18.repository;
 import org.springframework.stereotype.Repository;
 
 import com.ceu.ej18.model.Pasaporte;
+import com.ceu.ej18.model.Persona;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -20,6 +21,18 @@ public class PasaporteRepositoryImpl implements PasaporteRepository {
 		}else {
 			entityManager.merge(pasa1);
 		}
+	}
+
+	@Override
+	public Persona getPersonaByid(Integer id) {
+		Persona persona = entityManager.find(Persona.class, id);
+		return persona;
+	}
+
+	@Override
+	public Pasaporte getPasaporteById(Integer id) {
+		Pasaporte pasaporte = entityManager.find(Pasaporte.class, id);
+		return pasaporte;
 	}
 	
 	

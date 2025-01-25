@@ -1,5 +1,6 @@
 package com.ceu.ej18.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -30,6 +31,17 @@ public class Proyecto {
 	 joinColumns = {@JoinColumn(name = "id_proyecto")},
 	 inverseJoinColumns = {@JoinColumn(name = "id_persona")})
 	private List<Persona> personas;
+	 
+	public Proyecto() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Proyecto(String nombre) {
+		super();
+		this.nombre = nombre;
+		this.personas = new ArrayList<>();
+	}
 
 	public Integer getId() {
 		return id;
@@ -54,6 +66,9 @@ public class Proyecto {
 	public void setPersonas(List<Persona> personas) {
 		this.personas = personas;
 	}
-	 
-	 
+
+	@Override
+	public String toString() {
+		return "Proyecto [id=" + id + ", nombre=" + nombre + ", personas=" + personas + "]";
+	}
 }
