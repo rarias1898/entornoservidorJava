@@ -65,7 +65,12 @@ public class Ej18Application implements CommandLineRunner {
 		
 		// Obtener todas el nombre de todas las personas con los nombres de sus proyectos.
 		List<Persona> listaPersonas = personaService.getPersonas();
-		System.out.println(listaPersonas);
+		for (Persona persona : listaPersonas) {
+			System.out.println(persona.getNombre());
+			for (Proyecto proyecto : persona.getProyectos()) {
+				System.out.println(proyecto);
+			}
+		}
 	}
 
 }

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Pagina Home</title>
+</head>
+<body>
+	<h1 th:text="${mensaje}">Texto por defecto</h1>
+	<h2 th:text="${nombre}">Defecto</h2>
+	<img th:src="@{/imagenes/bird200.jpg}" alt="Logo" >
+	<a th:href="@{/index.html}">Al index</a>
+</body>
+</html>
