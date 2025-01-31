@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Formulario</title>
 </head>
 <body>
 	<h1>Form</h1>
+	<form th:action="@{/form}" th:object="${user}" method="post">
+		<input type="text" th:field="*{nombre}">
+		<input type="number" th:field="*{edad}">
+		
+		<button type="submit">Enviar</button>
+	</form>
 </body>
 </html>

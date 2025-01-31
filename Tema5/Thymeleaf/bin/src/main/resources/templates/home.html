@@ -8,15 +8,14 @@
 	<h1 th:text="${mensaje}">Texto por defecto</h1>
 	<h2 th:text="${nombre}">Defecto</h2>
 	<img th:src="@{/imagenes/bird200.jpg}" alt="Logo" >
-	<a th:href="@{/index}">Al index</a>
+	<a th:href="@{/index.html}">Al index</a>
 	
 	<p th:if="${role} == 'admin'">El usuario es admin</p>
-	<p th:unless="${role} == 'admin'">No es admin</p>
 	
 	<ul>
 		<li th:each="nombreItem: ${nombres}" th:text="${nombreItem}"></li>
 	</ul>
 	
-	<a th:href="@{/form}">Ir al formulario</a>
+	<a th:href="@{/form.html}">Form</a>
 </body>
 </html>
