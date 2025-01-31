@@ -9,5 +9,13 @@
 	<h2 th:text="${nombre}">Defecto</h2>
 	<img th:src="@{/imagenes/bird200.jpg}" alt="Logo" >
 	<a th:href="@{/index.html}">Al index</a>
+	
+	<p th:if="${role} == 'admin'">El usuario es admin</p>
+	
+	<ul>
+		<li th:each="nombreItem: ${nombres}" th:text="${nombreItem}"></li>
+	</ul>
+	
+	<a th:href="@{/form.html}">Form</a>
 </body>
 </html>
