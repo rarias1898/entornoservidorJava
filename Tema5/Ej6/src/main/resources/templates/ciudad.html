@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Buscxar por ciudad</h1>
+	
+	<form th:action="@{/ciudad}" th:object="${cliente}" method="post">
+		<label>Ciudad</label>
+		<input type="text" th:field="direccion.ciudad">
+		
+		<button type="submit">Enviar</button>
+	</form>
+	
+	<a th:href="@{/clientes}">Atrás</a>
+</body>
+</html>
