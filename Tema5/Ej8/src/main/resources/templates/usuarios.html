@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	td, th {
+		border: 1px solid black;
+	}
+	
+	table {
+		border-collapse: collapse;
+	}
+</style>
+</head>
+<body>
+	<h1>Lista de usuarios</h1>
+	
+	<table>
+	  <tr>
+	    <th>ID</th>
+	    <th>Nombre</th>
+	    <th>Email</th>
+	    <th>Estado Perfil</th>
+	  </tr>
+	  <tr th:each="usuarios: ${usuarios}">
+	    <td th:text="${usuarios.id}"></td>
+	    <td th:text="${usuarios.nombre}"></td>
+	  	<td th:text="${usuarios.email}"></td>
+	  	<td th:if="${usuarios.perfil != null}" th:text="${usuarios.perfil.estado}"></td>
+	  </tr>
+	</table>
+</body>
+</html>

@@ -25,22 +25,29 @@ public class Ej6Application implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		Cliente cliente1 = new Cliente();
 		Cliente cliente2 = new Cliente();
+		Cliente cliente3 = new Cliente();
 		cliente1.setNombre("Pepe Ruiz");
 		cliente2.setNombre(" Andres Ramirez");
+		cliente3.setNombre("Angel Arias");
 		
 		Direccion dir1 = new Direccion();
 		Direccion dir2 = new Direccion();
+		Direccion dir3 = new Direccion();
 		dir1.setCalle("Sol");
 		dir1.setCiudad("Oviedo");
 		dir2.setCalle("Mar");
 		dir2.setCiudad("Cadiz");
+		dir3.setCalle("calle1");
+		dir3.setCiudad("Oviedo");
 		
 		cliente1.setDireccion(dir1);
 		cliente2.setDireccion(dir2);
+		cliente3.setDireccion(dir3);
 		
 		// Añadir un cliente.
 		 service.addCliente(cliente1);
 		 service.addCliente(cliente2);
+		 service.addCliente(cliente3);
 		
 		
 		// Mostrar un cliente por su id.

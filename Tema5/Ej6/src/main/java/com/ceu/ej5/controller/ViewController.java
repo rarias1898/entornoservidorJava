@@ -52,8 +52,8 @@ public class ViewController {
 	}
 	
 	@PostMapping("/ciudad")
-	public String ciudad1(Model model) {
-		
-		return "redirect:/ciudad";
+	public String ciudad1(@ModelAttribute Cliente cliente, Model model) {
+		model.addAttribute("clientes", service.getClientesByCiudad(cliente.getDireccion().getCiudad()));
+		return "/ciudad";
 	}
 }

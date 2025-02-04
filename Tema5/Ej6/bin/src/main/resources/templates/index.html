@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Lista de clientes</title>
 <style>
 	td, th {
 		border: 1px solid black;
@@ -14,28 +14,24 @@
 </style>
 </head>
 <body>
-	<h1>Buscar por ciudad</h1>
-	
-	<form th:action="@{/ciudad}" th:object="${cliente}" method="post">
-		<label>Ciudad</label>
-		<input type="text" th:field="${cliente.direccion.ciudad}">
-		
-		<button type="submit">Enviar</button>
-	</form>
+	<h1>Lista de clientes</h1>
 	
 	<table>
 	  <tr>
 	    <th>ID</th>
 	    <th>Nombre</th>
 	    <th>Ciudad</th>
+	    <th>Acciones</th>
 	  </tr>
-	  <tr th:each="clientes: ${clientes}">
+	  <tr th:each="clientes: ${listaClientes}">
 	    <td th:text="${clientes.id}"></td>
 	    <td th:text="${clientes.nombre}"></td>
 	  	<td th:text="${clientes.direccion.ciudad}"></td>
+	  	<td><a th:href="@{/detalles/{id}(id=${clientes.id})}">Ver</a></td>
 	  </tr>
 	</table>
 	
-	<a th:href="@{/clientes}">Atrás</a>
+	<a th:href="@{/nuevo}">Nuevo Cliente</a>
+	<a th:href="@{/buscar}">Buscar por ciudad</a>
 </body>
 </html>
