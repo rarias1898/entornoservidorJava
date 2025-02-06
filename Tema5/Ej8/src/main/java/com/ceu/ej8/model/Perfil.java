@@ -30,9 +30,8 @@ public class Perfil {
 		super();
 	}
 
-	public Perfil(int id, String bio, String estado, Usuario usuario) {
+	public Perfil(String bio, String estado, Usuario usuario) {
 		super();
-		this.id = id;
 		this.bio = bio;
 		this.estado = estado;
 		this.usuario = usuario;

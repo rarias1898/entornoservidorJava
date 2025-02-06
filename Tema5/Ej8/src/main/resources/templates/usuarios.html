@@ -27,8 +27,10 @@
 	    <td th:text="${usuarios.id}"></td>
 	    <td th:text="${usuarios.nombre}"></td>
 	  	<td th:text="${usuarios.email}"></td>
-	  	<td th:if="${usuarios.perfil != null}" th:text="${usuarios.perfil.estado}"></td>
+	  	<td th:text="${usuarios.perfil != null ? usuarios.perfil.estado : 'Sin estado'}"></td>
 	  </tr>
 	</table>
+	
+	<a th:href="@{/}">Atrás</a>
 </body>
 </html>
