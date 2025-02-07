@@ -22,12 +22,14 @@
 	    <th>Nombre</th>
 	    <th>Email</th>
 	    <th>Estado Perfil</th>
+	    <th>Acciones</th>
 	  </tr>
 	  <tr th:each="usuarios: ${usuarios}">
 	    <td th:text="${usuarios.id}"></td>
 	    <td th:text="${usuarios.nombre}"></td>
 	  	<td th:text="${usuarios.email}"></td>
 	  	<td th:text="${usuarios.perfil != null ? usuarios.perfil.estado : 'Sin estado'}"></td>
+	  	<td><a th:href="@{/nuevo/{id}(id=${usuarios.id})}">Ver</a></td>
 	  </tr>
 	</table>
 	

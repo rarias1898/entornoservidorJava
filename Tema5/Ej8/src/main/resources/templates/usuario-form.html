@@ -17,9 +17,14 @@
 		<label>Estado</label>
 		<input type="text" th:field="*{perfil.estado}">
 		
-		<button type="submit">Enviar</button>
+		
+		<span th:if="${usuario.id == 0}">
+			<button type="submit">Enviar</button>
+		</span>
+		
+		<span th:if="${usuario.id != 0}">
+			<a th:href="@{/}">Atrás</a>
+		</span>
 	</form>
-	
-	<a th:href="@{/}">Atrás</a>
 </body>
 </html>
