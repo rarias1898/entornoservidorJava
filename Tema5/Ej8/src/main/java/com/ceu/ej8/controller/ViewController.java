@@ -1,6 +1,5 @@
 package com.ceu.ej8.controller;
 
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,9 +41,8 @@ public class ViewController {
 	}
 	
 	@GetMapping("/primer")
-	public String primerUsuarioDisponible(Model model) {
-		Optional<Usuario> usuarioDispo = service.getFirstDisponible();
-		model.addAttribute("usuario", usuarioDispo);
+	public String primerUsuarioDisponible(Model model) { 
+		model.addAttribute("usuario", service.getFirstDisponible());
 		return "primerUsuario";
 	}
 }

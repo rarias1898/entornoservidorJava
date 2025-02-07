@@ -7,8 +7,8 @@
 <body>
 	<h1>Primer usuario disponible</h1>
 	
-	<div>
-		<p th:text="${usuario.nombre}"></p>
+	<div th:if="${usuario.isPresent()}">
+		<p th:text="${usuario.get().perfil.estado != 'DISPONIBLE'} ? 'No hay usuarios DISPONIBLES' : ${usuario.get().nombre} + ' - ' + ${usuario.get().email} + ' - ' + ${usuario.get().perfil.bio}"></p>
 	</div>
 </body>
 </html>
