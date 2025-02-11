@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	td, th {
+		border: 1px solid black;
+	}
+	
+	table {
+		border-collapse: collapse;
+	}
+</style>
+</head>
+<body>
+	<h1>Lista de oficinas</h1>
+	
+	<table>
+	  <tr>
+	    <th>Ubicación</th>
+	    <th>Teléfono</th>
+	  </tr>
+	  <tr th:each="oficina: ${oficinas}">
+	    <td th:text="${oficina.ubicacion}"></td>
+	    <td th:text="${oficina.telefono}"></td>
+	  </tr>
+	</table>
+</body>
+</html>

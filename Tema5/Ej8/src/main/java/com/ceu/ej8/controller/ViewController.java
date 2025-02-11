@@ -37,7 +37,7 @@ public class ViewController {
 	}
 	
 	@PostMapping("/nuevo")
-	public String nuevoUsuario(@ModelAttribute Usuario usuario, Model model) {
+	public String nuevoUsuario(@ModelAttribute Usuario usuario) {
 		service.addUsuario(usuario);
 		return "redirect:/usuarios";
 	}
