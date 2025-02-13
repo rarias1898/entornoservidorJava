@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Nueva Oficina</h1>
+	
+	<form th:action="@{/add-oficina}" th:object="${oficina}" method="post">
+		<label>Teléfono</label>
+		<input type="text" th:field="*{telefono}">
+		<label>Ubicación</label>
+		<input type="text" th:field="*{ubicacion}">
+		
+		<button type="submit">Enviar</button>
+	</form>
+</body>
+</html>

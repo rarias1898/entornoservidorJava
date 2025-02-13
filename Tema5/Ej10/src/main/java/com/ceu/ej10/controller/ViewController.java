@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.ceu.ej10.model.Empleado;
+import com.ceu.ej10.model.Oficina;
 import com.ceu.ej10.service.EmpleadoService;
 import com.ceu.ej10.service.OficinaService;
 
@@ -48,5 +49,17 @@ public class ViewController {
 	public String listaOficinas(Model model) {
 		model.addAttribute("oficinas", oficinaService.getOficinas());
 		return "oficinas-lista";
+	}
+	
+	@GetMapping("/add-oficina")
+	public String addOficina(Model model) {
+		model.addAttribute("oficina", new Oficina());
+		return "oficina-form";
+	}
+	
+	@PostMapping("/add-oficina")
+	public String addOficina(@ModelAttribute Oficina oficina) {
+		oficinaService.addOficina(oficina);
+		return "redirect:/oficinas";
 	}
 }

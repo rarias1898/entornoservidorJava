@@ -36,12 +36,11 @@ public class Empleado {
 		super();
 	}
 
-	public Empleado(String nombre, String puesto, String email, Oficina oficina) {
+	public Empleado(String nombre, String puesto, String email) {
 		super();
 		this.nombre = nombre;
 		this.puesto = puesto;
 		this.email = email;
-		this.oficina = oficina;
 	}
 
 	public int getId() {
@@ -83,5 +82,12 @@ public class Empleado {
 	public void setOficina(Oficina oficina) {
 		this.oficina = oficina;
 	}
+
+	@Override
+	public String toString() {
+		return "Empleado [id=" + id + ", nombre=" + nombre + ", puesto=" + puesto + ", email=" + email + ", oficina="
+				+ oficina + "]";
+	}
+	
 	
 }

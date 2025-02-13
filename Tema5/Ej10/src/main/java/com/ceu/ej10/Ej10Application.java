@@ -25,13 +25,16 @@ public class Ej10Application implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Empleado empleado1 = new Empleado("Angel", "Desarrollador", "angel@angel.com", null);
+		Empleado empleado1 = new Empleado("Angel", "Desarrollador", "angel@angel.com");
 		
 		empleadoService.addEmpleado(empleado1);
 		
 		Oficina oficina1 = new Oficina("Calle1", "123456789");
 		
 		oficinaService.addOficina(oficina1);
+		
+		empleado1.setOficina(oficina1);
+		System.out.println(empleado1);
 	}
 
 }

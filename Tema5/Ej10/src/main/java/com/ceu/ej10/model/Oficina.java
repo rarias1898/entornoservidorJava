@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,6 +22,9 @@ public class Oficina {
 	
 	@Column(name = "telefono")
 	private String telefono;
+	
+	@OneToOne(mappedBy = "oficina")
+	private Empleado empleado;
 
 	public Oficina() {
 		super();
