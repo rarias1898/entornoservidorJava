@@ -33,8 +33,8 @@ public class Ej10Application implements CommandLineRunner {
 		
 		oficinaService.addOficina(oficina1);
 		
-		empleado1.setOficina(oficina1);
-		System.out.println(empleado1);
+		// empleado1.setOficina(oficina1);
+		// System.out.println(empleado1);
 	}
 
 }
